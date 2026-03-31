@@ -25,7 +25,8 @@ const Agents = () => {
                 <img 
                   src={agent.image} 
                   alt={agent.name} 
-                  className="w-full h-[400px] object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                  // 🛠️ FIX: Added 'object-top' here so it stops chopping off his head!
+                  className="w-full h-[400px] object-cover object-top transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
                 />
               </div>
               

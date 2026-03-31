@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Navbar = () => {
+  // 📱 STATE: Track if the mobile menu is open or closed
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     // 💎 The Upgrade: A rich, deep gradient replacing the plain white!
     <nav className="fixed w-full z-50 top-0 bg-gradient-to-r from-slate-900 via-emerald-900 to-slate-900 shadow-xl border-b border-emerald-800/50 transition-all duration-300">
@@ -29,17 +32,41 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button - White icon */}
+          {/* Mobile Menu Button - 🛠️ FIX: Now wired up to toggle the 'isOpen' state! */}
           <div className="md:hidden flex items-center">
-            <button className="text-slate-300 hover:text-white focus:outline-none">
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className="text-slate-300 hover:text-white focus:outline-none"
+            >
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                {/* 🔄 Dynamically swap the icon based on state */}
+                {isOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                )}
               </svg>
             </button>
           </div>
 
         </div>
       </div>
+
+      {/* 📱 MOBILE MENU UI - 🛠️ FIX: This only renders if isOpen is true */}
+      {isOpen && (
+        <div className="md:hidden bg-slate-900 border-t border-emerald-800/50 shadow-2xl">
+          <div className="px-4 pt-2 pb-6 space-y-1 sm:px-3">
+            <a href="#" className="block px-3 py-3 text-base font-medium text-white hover:text-emerald-400 hover:bg-slate-800 rounded-md transition-colors">Buy</a>
+            <a href="#" className="block px-3 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">Rent</a>
+            <a href="#" className="block px-3 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">Sell</a>
+            <a href="#" className="block px-3 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">Agents</a>
+            
+            <button className="w-full text-center mt-4 bg-emerald-500 hover:bg-emerald-400 text-slate-900 px-3 py-3 rounded-sm text-base font-bold transition-colors">
+              Contact an Agent
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
